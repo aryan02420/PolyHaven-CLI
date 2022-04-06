@@ -1,0 +1,15 @@
+FROM node:17-alpine
+
+WORKDIR /usr/src/app
+
+RUN mkdir ./downloads
+
+VOLUME ./downloads
+
+COPY ./package*.json ./
+
+RUN npm install
+
+COPY ./dist ./dist
+
+CMD ["node", "--experimental-fetch", "--no-warnings", "dist/download.js"]
